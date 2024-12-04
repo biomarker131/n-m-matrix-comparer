@@ -1,0 +1,2 @@
+Identifier of subtle differences between two m*n matrices, where m represents rows and n represents columns; additionally, m matrix 1 = m matrix 2 and n matrix 1 = n matrix 2.
+Usage: Approach to compare a manually generated matrix (expected) against a matrix generated with a script (observed) in order to identify faults and bugs in the matrix processing program.
