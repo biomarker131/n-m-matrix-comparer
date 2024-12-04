@@ -1,2 +1,12 @@
 Identifier of subtle differences between two m*n matrices, where m represents rows and n represents columns; additionally, m matrix 1 = m matrix 2 and n matrix 1 = n matrix 2.
 Usage: Approach to compare a manually generated matrix (expected) against a matrix generated with a script (observed) in order to identify faults and bugs in the matrix processing program.
+
+Limitations:
+
+This comparison script should be used with the following precautions: 
+• It should be used on matrices of the same size n*m where we want to find differences in values from the second row onward (header=TRUE). 
+• Differences in the title row (row 1) will not be detected, and if they are larger differences, they will cause an error. The purpose of the script is to compare the values, which is the most difficult part when comparing 
+matrices. 
+• It will generate an error when it finds differences in the size of n or m in the matrices, highlighting its purpose of comparing test matrices with manually created expected result matrices. 
+• It will run but without checking anything if columns of different sizes are left, for example, leaving a single text string in row 1 and the data matrix in the rest of the columns. 
+The same matrix size must be maintained throughout the entire matrix.
