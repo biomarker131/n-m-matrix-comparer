@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+import pandas as pd
+# Prompt the user for the file names
+file1 = input("Enter the name of the first matrix file: ").strip()
+file2 = input("Enter the name of the second matrix file: ").strip()
+# Prompt the user for the delimiter used in each file
+delimiter1 = input("Enter the delimiter for the first matrix file (e.g., “,” for comma, “\\t” for tab): ").strip()
+delimiter2 = input("Enter the delimiter for the second matrix file (e.g., “,” for comma, “\\t" for tab): ").strip()
+# Load the data with the specified delimiter
+try:
+    df1 = pd.read_csv(file1, delimiter=delimiter1)
+    df2 = pd.read_csv(file2, delimiter=delimiter2)
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+    exit(1)
+except pd.errors.ParserError as e:
+    print(f"Error parsing the file: {e}")
+    exit(1)
+# Ensure that the number of columns in both matrices is the same
+if df1.shape[1] != df2.shape[1]:
+    print("The matrices have a different number of columns. Comparison cannot be performed.")
+else:
+    differences_found = False
+    # Iterate over each pair of columns and compare them
+    for col1, col2 in zip(df1.columns, df2.columns):
+        if not df1[col1].equals(df2[col2]):
+            differences_found = True
+            diff_indices = df1[col1] != df2[col2]
+            print(f"Differences found in column pair '{col1}' and '{col2}':")
+            print("Values in file1:")
+            print(df1[col1][diff_indices])
+            print("Values in file2:")
+            print(df2[col2][diff_indices])
+        else:
+            print(f"No differences in column pair '{col1}' and '{col2}'")
+    if not differences_found:
+        print("No differences were found in any columns.")
